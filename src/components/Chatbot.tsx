@@ -71,32 +71,33 @@ const Chatbot: React.FC = () => {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-blue-700 z-40"
+        className="fixed bottom-6 right-6 bg-primary text-primary-foreground px-4 py-3 rounded-full shadow-large hover:bg-primary-dark transition-all duration-300 hover:scale-105 z-40"
         aria-label="Open chat"
       >
         💬
       </button>
 
       {open && (
-        <div className="fixed bottom-20 right-6 w-80 bg-white shadow-2xl rounded-2xl overflow-hidden z-50 border">
-          <div className="bg-blue-600 text-white p-3 font-semibold">AskCounsel</div>
-          <div ref={listRef} className="h-64 overflow-y-auto p-3 flex flex-col gap-2">
+        <div className="fixed bottom-20 right-6 w-80 bg-card shadow-large rounded-2xl overflow-hidden z-50 border border-border animate-scale-in">
+          <div className="bg-primary text-primary-foreground p-4 font-semibold">AskCounsel</div>
+          <div ref={listRef} className="h-64 overflow-y-auto p-4 flex flex-col gap-3">
             {messages.map((m, i) => (
-              <div key={i} className={`max-w-[80%] rounded-lg p-2 text-sm ${m.sender === "bot" ? "bg-gray-100 self-start" : "bg-blue-600 text-white self-end"}`}>
+              <div key={i} className={`max-w-[80%] rounded-lg p-3 text-sm animate-fade-in ${m.sender === "bot" ? "bg-muted text-muted-foreground self-start" : "bg-primary text-primary-foreground self-end"}`}>
                 {m.text}
               </div>
             ))}
           </div>
 
-          <div className="flex items-center gap-2 p-2 border-t">
-            <button onClick={startVoice} className="px-2 py-1 rounded bg-gray-100">🎤</button>
+          <div className="flex items-center gap-2 p-3 border-t border-border bg-background">
+            <button onClick={startVoice} className="px-3 py-2 rounded-lg bg-muted hover:bg-accent transition-colors">🎤</button>
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 px-3 py-2 outline-none"
+              onKeyPress={(e) => e.key === "Enter" && send()}
+              className="flex-1 px-3 py-2 bg-background border border-input rounded-lg outline-none focus:ring-2 focus:ring-ring transition-all"
               placeholder="Type your message..."
             />
-            <button onClick={send} className="px-3 py-2 bg-blue-600 text-white rounded">Send</button>
+            <button onClick={send} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-dark transition-colors">Send</button>
           </div>
         </div>
       )}
