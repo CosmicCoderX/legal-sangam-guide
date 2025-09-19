@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Scale } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Menu, X, Scale, Globe } from "lucide-react";
+import { useLanguage, languageNames, Language } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { currentLanguage, setLanguage, t } = useLanguage();
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -18,26 +21,39 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">
-              Services
+              {t('services')}
             </a>
             <a href="#lawyers" className="text-muted-foreground hover:text-primary transition-colors">
-              Find Lawyers
+              {t('findLawyers')}
             </a>
             <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-              About
+              {t('about')}
             </a>
             <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
-              Contact
+              {t('contact')}
             </a>
           </div>
 
-          {/* CTA Buttons */}
+          {/* Language Selector & CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            <Select value={currentLanguage} onValueChange={(value) => setLanguage(value as Language)}>
+              <SelectTrigger className="w-auto border-0 bg-transparent hover:bg-muted/50 transition-colors">
+                <Globe className="h-4 w-4 mr-2" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="min-w-[120px]">
+                {Object.entries(languageNames).map(([code, name]) => (
+                  <SelectItem key={code} value={code}>
+                    {name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <Button variant="ghost" size="sm">
-              Sign In
+              {t('signIn')}
             </Button>
             <Button size="sm" className="bg-gradient-hero shadow-soft hover:shadow-medium transition-all">
-              Get Started
+              {t('getStarted')}
             </Button>
           </div>
 
@@ -61,32 +77,45 @@ const Navbar = () => {
                 href="#services"
                 className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
               >
-                Services
+                {t('services')}
               </a>
               <a
                 href="#lawyers"
                 className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
               >
-                Find Lawyers
+                {t('findLawyers')}
               </a>
               <a
                 href="#about"
                 className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
               >
-                About
+                {t('about')}
               </a>
               <a
                 href="#contact"
                 className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
               >
-                Contact
+                {t('contact')}
               </a>
               <div className="pt-4 space-y-2">
+                <Select value={currentLanguage} onValueChange={(value) => setLanguage(value as Language)}>
+                  <SelectTrigger className="w-full bg-transparent border border-input">
+                    <Globe className="h-4 w-4 mr-2" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(languageNames).map(([code, name]) => (
+                      <SelectItem key={code} value={code}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <Button variant="ghost" className="w-full justify-start">
-                  Sign In
+                  {t('signIn')}
                 </Button>
                 <Button className="w-full bg-gradient-hero shadow-soft">
-                  Get Started
+                  {t('getStarted')}
                 </Button>
               </div>
             </div>

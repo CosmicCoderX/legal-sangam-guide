@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Users, Scale, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
   return (
     <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       {/* Background gradient */}
@@ -13,21 +15,20 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6 shadow-soft">
             <Shield className="w-4 h-4 mr-2" />
-            India's Most Trusted Legal Platform
+            {t('trustBadge')}
           </div>
 
           {/* Main headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Connect with
-            <span className="bg-gradient-hero bg-clip-text text-transparent"> Verified Legal Experts</span>
+            {t('heroTitle')}
+            <span className="bg-gradient-hero bg-clip-text text-transparent"> {t('heroTitleHighlight')}</span>
             <br />
-            Across India
+            {t('heroTitleEnd')}
           </h1>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Get instant legal advice, book consultations, and access verified lawyers near you. 
-            Your trusted partner for all legal needs with AI-powered assistance and transparent pricing.
+            {t('heroDescription')}
           </p>
 
           {/* CTA Buttons */}
@@ -36,7 +37,7 @@ const Hero = () => {
               size="lg" 
               className="bg-gradient-hero shadow-large hover:shadow-xl transition-all transform hover:scale-105 text-lg px-8 py-6"
             >
-              Find Legal Help Now
+              {t('findLegalHelp')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
@@ -44,7 +45,7 @@ const Hero = () => {
               size="lg"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all text-lg px-8 py-6"
             >
-              Browse Lawyers
+              {t('browseLawyers')}
             </Button>
           </div>
 
@@ -53,22 +54,22 @@ const Hero = () => {
             <div className="flex items-center justify-center space-x-3 p-4 rounded-lg bg-gradient-card shadow-soft">
               <Users className="w-8 h-8 text-primary" />
               <div className="text-left">
-                <div className="font-semibold text-foreground">10,000+ Lawyers</div>
-                <div className="text-sm text-muted-foreground">Verified Professionals</div>
+                <div className="font-semibold text-foreground">{t('lawyersCount')}</div>
+                <div className="text-sm text-muted-foreground">{t('verifiedProfessionals')}</div>
               </div>
             </div>
             <div className="flex items-center justify-center space-x-3 p-4 rounded-lg bg-gradient-card shadow-soft">
               <Scale className="w-8 h-8 text-primary" />
               <div className="text-left">
-                <div className="font-semibold text-foreground">50+ Legal Areas</div>
-                <div className="text-sm text-muted-foreground">Expert Coverage</div>
+                <div className="font-semibold text-foreground">{t('legalAreas')}</div>
+                <div className="text-sm text-muted-foreground">{t('expertCoverage')}</div>
               </div>
             </div>
             <div className="flex items-center justify-center space-x-3 p-4 rounded-lg bg-gradient-card shadow-soft">
               <CheckCircle className="w-8 h-8 text-primary" />
               <div className="text-left">
-                <div className="font-semibold text-foreground">99% Success Rate</div>
-                <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                <div className="font-semibold text-foreground">{t('successRate')}</div>
+                <div className="text-sm text-muted-foreground">{t('clientSatisfaction')}</div>
               </div>
             </div>
           </div>
